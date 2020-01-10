@@ -1,12 +1,13 @@
 import React from 'react'
 import { filterAction } from '../reducers/filterReducer'
 import { filterList } from '../reducers/anecdoteReducer'
+import {connect} from 'react-redux'
 
-const Filter = ({store}) => {
+const Filter = (props) => {
   const handleChange = (e) => {
     const query = e.target.value
-    store.dispatch(filterAction(query))
-    store.dispatch(filterList(query))
+    props.filterAction(query)
+    props.filterList(query)
 }
   const style = {
     marginBottom: 10
@@ -19,4 +20,12 @@ const Filter = ({store}) => {
   )
 }
 
-export default Filter
+
+const mapDispatchToProps = {
+    filterAction,
+    filterList
+}
+
+const ConnectedFilter = connect(null,mapDispatchToProps)(Filter)
+
+export default ConnectedFilter

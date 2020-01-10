@@ -17,7 +17,7 @@ const asObject = anecdote => {
   }
 }
 
-const initialState = anecdotesAtStart.map(asObject)
+let initialState = anecdotesAtStart.map(asObject)
 
 const reducer = (state = initialState, action) => {
   // console.log('state now: ', state)
@@ -33,9 +33,9 @@ const reducer = (state = initialState, action) => {
   }
   else if (action.type === "NEWANECDOTE") {
     const anecdoteToSave = asObject(action.data.anecdote)
+    // return initialState.push(anecdoteToSave)
     return state.concat(anecdoteToSave)
   } else if (action.type === "FILTERLIST"){
-    console.log('trabajando hermanazo', action.data.query)
 
     return initialState.filter (l => l.content.includes(action.data.query))
   }

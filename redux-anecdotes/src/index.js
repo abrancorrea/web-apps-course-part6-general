@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import App from './App'
 import reducer from './reducers/anecdoteReducer'
@@ -16,7 +17,9 @@ console.log(store.getState())
 
 const render = () => {
   ReactDOM.render(
-    <App store={store} />,
+    <Provider store={store}>
+    <App />
+    </Provider>,
     document.getElementById('root')
   )
 }
