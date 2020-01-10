@@ -34,6 +34,10 @@ const reducer = (state = initialState, action) => {
   else if (action.type === "NEWANECDOTE") {
     const anecdoteToSave = asObject(action.data.anecdote)
     return state.concat(anecdoteToSave)
+  } else if (action.type === "FILTERLIST"){
+    console.log('trabajando hermanazo', action.data.query)
+
+    return initialState.filter (l => l.content.includes(action.data.query))
   }
 
   return state
@@ -51,6 +55,13 @@ export const newAnecdote = anecdote => {
   return {
     type : "NEWANECDOTE",
     data: {anecdote}
+  }
+}
+
+export const filterList = query => {
+  return {
+    type: "FILTERLIST",
+    data: {query}
   }
 }
 export default reducer
