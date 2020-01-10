@@ -1,9 +1,14 @@
 import React from 'react';
-import { upVote } from './reducers/anecdoteReducer'
+import { upVote, newAnecdote} from './reducers/anecdoteReducer'
 const App = (props) => {
   const anecdotes = props.store.getState()
 
   const vote = id => props.store.dispatch( upVote(id) )
+
+  const handleNewAnecdote = e => {
+    e.preventDefault()
+    props.store.dispatch(newAnecdote(e.target.anecdote.value))
+  }
 
   return (
     <div>
@@ -20,8 +25,8 @@ const App = (props) => {
         </div>
       )}
       <h2>create new</h2>
-      <form>
-        <div><input /></div>
+      <form onSubmit={handleNewAnecdote}>
+        <div><input name="anecdote"/></div>
         <button>create</button>
       </form>
     </div>
