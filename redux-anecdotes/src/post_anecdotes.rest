@@ -1,0 +1,7 @@
+POST http://localhost:3001/anecdotes
+Content-Type: : application/json
+
+{
+    "content": "Nota backend",
+    "votes": 0
+}

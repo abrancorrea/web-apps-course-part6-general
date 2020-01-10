@@ -23,24 +23,26 @@ const reducer = (state = initialState, action) => {
   // console.log('state now: ', state)
   // console.log('action', action)
 
-  if ( action.type === "UPVOTE") {
+  switch (action.type){
+    
+    case "UPVOTE":
     let withUpvote = state.find(l => l.id === action.data.id)
     withUpvote = {...withUpvote, votes: (withUpvote.votes + 1) }
-
     return state.map( l => l.id ===action.data.id? withUpvote : l).sort((a,b) => b.votes - a.votes )
 
+    case "NEWANECDOTE":
+    return state.concat(action.data.anecdote)
 
-  }
-  else if (action.type === "NEWANECDOTE") {
-    const anecdoteToSave = asObject(action.data.anecdote)
-    // return initialState.push(anecdoteToSave)
-    return state.concat(anecdoteToSave)
-  } else if (action.type === "FILTERLIST"){
-
+    case "FILTERLIST":
     return initialState.filter (l => l.content.includes(action.data.query))
+
+    case "INITNOTES":
+    return action.data
+
+    default: 
+    return state
   }
 
-  return state
 }
 
 
@@ -62,6 +64,13 @@ export const filterList = query => {
   return {
     type: "FILTERLIST",
     data: {query}
+  }
+}
+
+export const initializeAnecdotes = data => {
+  return {
+    type: "INITNOTES",
+    data
   }
 }
 export default reducer
