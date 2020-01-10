@@ -20,8 +20,8 @@ const asObject = anecdote => {
 const initialState = anecdotesAtStart.map(asObject)
 
 const reducer = (state = initialState, action) => {
-  console.log('state now: ', state)
-  console.log('action', action)
+  // console.log('state now: ', state)
+  // console.log('action', action)
 
   if ( action.type === "UPVOTE") {
     let withUpvote = state.find(l => l.id === action.data.id)
@@ -29,7 +29,7 @@ const reducer = (state = initialState, action) => {
 
     return state.map( l => l.id ===action.data.id? withUpvote : l).sort((a,b) => b.votes - a.votes )
 
-    
+
   }
   else if (action.type === "NEWANECDOTE") {
     const anecdoteToSave = asObject(action.data.anecdote)
